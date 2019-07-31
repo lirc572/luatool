@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 #
 # ESP8266 luatool
 # Author e-mail: 4ref0nt@gmail.com
@@ -28,7 +28,7 @@ from os.path import basename
 tqdm_installed = True
 try:
     from tqdm import tqdm
-except ImportError, e:
+except ImportError as e:
     if e.message == 'No module named tqdm':
         tqdm_installed = False
     else:
@@ -67,7 +67,7 @@ class AbstractTransport:
         char = ''
         i = -1
         while char != chr(62):  # '>'
-            char = self.read(1)
+            char = self.read(1).decode()
             if char == '':
                 raise Exception('No proper answer from MCU')
             if char == chr(13) or char == chr(10):  # LF or CR
@@ -116,7 +116,7 @@ class SerialTransport(AbstractTransport):
         if len(data) > 0 and not args.bar:
             sys.stdout.write("\r\n->")
             sys.stdout.write(data.split("\r")[0])
-        self.serial.write(data)
+        self.serial.write(data.encode())
         sleep(self.delay)
         if check > 0:
             self.performcheck(data)
