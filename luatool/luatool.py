@@ -153,7 +153,7 @@ class TcpSocketTransport(AbstractTransport):
         if len(data) > 0 and not args.bar:
             sys.stdout.write("\r\n->")
             sys.stdout.write(data.split("\r")[0])
-        self.socket.sendall(data)
+        self.socket.sendall(data.encode())
         if check > 0:
             self.performcheck(data)
         elif not args.bar:
