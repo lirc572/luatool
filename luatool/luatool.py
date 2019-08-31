@@ -24,15 +24,25 @@ import socket
 import argparse
 from os.path import basename
 
+py_ver = sys.version_info[0]
 
 tqdm_installed = True
-try:
-    from tqdm import tqdm
-except ImportError as e:
-    if e.message == 'No module named tqdm':
-        tqdm_installed = False
-    else:
-        raise
+if py_ver = 2:
+    try:
+        from tqdm import tqdm
+    except ImportError, e:
+        if e.message == 'No module named tqdm':
+            tqdm_installed = False
+        else:
+            raise
+else:
+    try:
+        from tqdm import tqdm
+    except ImportError as e:
+        if e.message == 'No module named tqdm':
+            tqdm_installed = False
+        else:
+            raise
 
 version = "0.6.4"
 
@@ -67,7 +77,10 @@ class AbstractTransport:
         char = ''
         i = -1
         while char != chr(62):  # '>'
-            char = self.read(1).decode()
+            if py_ver == 2:
+                char = self.read(1)
+            else:
+                char = self.read(1).decode()
             if char == '':
                 raise Exception('No proper answer from MCU')
             if char == chr(13) or char == chr(10):  # LF or CR
@@ -116,7 +129,10 @@ class SerialTransport(AbstractTransport):
         if len(data) > 0 and not args.bar:
             sys.stdout.write("\r\n->")
             sys.stdout.write(data.split("\r")[0])
-        self.serial.write(data.encode())
+        if py_ver == 2:
+            self.serial.write(data)
+        else:
+            self.serial.write(data.encode())
         sleep(self.delay)
         if check > 0:
             self.performcheck(data)
@@ -153,7 +169,10 @@ class TcpSocketTransport(AbstractTransport):
         if len(data) > 0 and not args.bar:
             sys.stdout.write("\r\n->")
             sys.stdout.write(data.split("\r")[0])
-        self.socket.sendall(data.encode())
+        if py_ver == 2:
+            self.socket.sendall(data)
+        elif:
+            self.socket.sendall(data.encode())
         if check > 0:
             self.performcheck(data)
         elif not args.bar:
