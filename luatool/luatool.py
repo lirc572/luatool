@@ -27,22 +27,13 @@ from os.path import basename
 py_ver = sys.version_info[0]
 
 tqdm_installed = True
-if py_ver == 2:
-    try:
-        from tqdm import tqdm
-    except ImportError, e:
-        if e.message == 'No module named tqdm':
-            tqdm_installed = False
-        else:
-            raise
-else:
-    try:
-        from tqdm import tqdm
-    except ImportError as e:
-        if e.message == 'No module named tqdm':
-            tqdm_installed = False
-        else:
-            raise
+try:
+    from tqdm import tqdm
+except ImportError as e:
+    if e.message == 'No module named tqdm':
+        tqdm_installed = False
+    else:
+        raise
 
 version = "0.6.4"
 
