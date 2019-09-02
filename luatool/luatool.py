@@ -162,7 +162,7 @@ class TcpSocketTransport(AbstractTransport):
             sys.stdout.write(data.split("\r")[0])
         if py_ver == 2:
             self.socket.sendall(data)
-        elif:
+        else:
             self.socket.sendall(data.encode())
         if check > 0:
             self.performcheck(data)
