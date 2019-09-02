@@ -27,7 +27,7 @@ from os.path import basename
 py_ver = sys.version_info[0]
 
 tqdm_installed = True
-if py_ver = 2:
+if py_ver == 2:
     try:
         from tqdm import tqdm
     except ImportError, e:
