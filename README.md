@@ -181,4 +181,4 @@ that will be used to communicate with the module via TCP/IP.
 
 #### Note:
 
-*When uploading files through serial port, a wrong baud rate causes the program to through an error.*
+*When uploading files through serial port, a wrong baud rate causes the program to throw an error.*
