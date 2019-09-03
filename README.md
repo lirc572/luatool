@@ -15,7 +15,7 @@ Another my project for NodeMCU: ESPlorer  Integrated Development Environment (ID
 
 ### Requirements
 
-python 2.7, pyserial (as for esptool)
+python 2.7 or python 3.x, pyserial (as for esptool)
 
 ### Discuss
 [http://esp8266.ru](http://esp8266.ru/forum/threads/luatool.11/)
@@ -179,3 +179,6 @@ that will be used to communicate with the module via TCP/IP.
 - --dest - destination flash file, default main.lua
 - --dofile - run the just uploaded file
 
+#### Note:
+
+*When uploading files through serial port, a wrong baud rate causes the program to through an error.*
